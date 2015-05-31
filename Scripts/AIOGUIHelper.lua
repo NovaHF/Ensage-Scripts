@@ -813,7 +813,7 @@ function MissingTick()
                 end
             end
             if lastseenList[v.handle] == nil and v.visible == false then
-                lastseenList[v.handle] = GetGameTime()
+                lastseenList[v.handle] = client.gameTime
                 missingMonitor.side.heroes[v.handle].missTime.color = 0xFFFFFFFF
                 missingMonitor.side.heroes[v.handle].etaTime.color = 0xFFFFFFFF
                 missingMonitor.side.heroes[v.handle].visibleText.color = 0x00000000
@@ -889,7 +889,7 @@ function MissingTick()
                 end
 
                 --Miss timer
-                local delta = GetGameTime() - lastseenList[v.handle]
+                local delta = client.gameTime - lastseenList[v.handle]
                 local minutes = math.floor(delta/60)
                 local seconds = delta%60
                 local ssText
@@ -1138,7 +1138,7 @@ end
 --Function returns whether roshan is alive or not
 function RoshAlive()
         local entities = entityList:FindEntities({classId=CDOTA_Unit_Roshan})
-        tickDelta = GetGameTime()-deathTick
+        tickDelta = client.gameTime-deathTick
         if #entities > 0 and tickDelta > 15 then
                 local rosh = entities[1]
                 if rosh and rosh.alive then
@@ -1278,7 +1278,7 @@ end
 
 function FireEvent( name )
     if name == "dota_roshan_kill" then
-            deathTick = GetGameTime()
+            deathTick = client.gameTime
     end
 end
 
